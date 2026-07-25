@@ -27,15 +27,30 @@ describe('levelColor', () => {
 });
 
 describe('buildWeeks', () => {
-  it('groups days into 7-day weeks in order', () => {
+  it('groups days into 7-day weeks in order when the range starts on a Sunday', () => {
+    // 2025-01-05 is a Sunday
     const days = Array.from({ length: 14 }, (_, i) => ({
-      date: `2025-01-${String(i + 1).padStart(2, '0')}`,
+      date: `2025-01-${String(i + 5).padStart(2, '0')}`,
       count: i,
     }));
     const weeks = buildWeeks(days);
     expect(weeks).toHaveLength(2);
     expect(weeks[0].days).toHaveLength(7);
-    expect(weeks[1].days[0].date).toBe('2025-01-08');
+    expect(weeks[1].days[0]?.date).toBe('2025-01-12');
+  });
+
+  it('pads the first week with nulls so days stay aligned to their weekday row', () => {
+    // 2025-01-01 is a Wednesday, so the first week needs 3 leading empty cells
+    const days = Array.from({ length: 2 }, (_, i) => ({
+      date: `2025-01-0${i + 1}`,
+      count: i,
+    }));
+    const weeks = buildWeeks(days);
+    expect(weeks).toHaveLength(1);
+    expect(weeks[0].days).toHaveLength(5);
+    expect(weeks[0].days.slice(0, 3)).toEqual([null, null, null]);
+    expect(weeks[0].days[3]?.date).toBe('2025-01-01');
+    expect(weeks[0].days[4]?.date).toBe('2025-01-02');
   });
 });
 

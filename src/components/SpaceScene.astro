@@ -52,8 +52,11 @@
       </div>
     </div>
 
-    <div class="ship">
+    <div class="laser-wrap">
       <div class="laser"></div>
+    </div>
+
+    <div class="ship">
       <div class="sprite ship-sprite"></div>
       <div class="thrust"></div>
     </div>
@@ -161,7 +164,8 @@
   }
 
   .ship { position: absolute; bottom: 19%; left: 50%; margin-left: -18px; animation: om-patrol 7s steps(13) infinite alternate; }
-  .laser { position: absolute; left: 16px; bottom: 30px; width: 4px; height: 16px; background: #38bdf8; animation: om-laser 1.3s steps(12) infinite; }
+  .laser-wrap { position: absolute; top: 0; bottom: 0; left: 50%; margin-left: -18px; animation: om-patrol 7s steps(13) infinite alternate; }
+  .laser { position: absolute; left: 16px; bottom: calc(19% + 30px); width: 4px; height: 16px; background: #38bdf8; animation: om-laser 1.3s steps(12) infinite; }
   .ship-sprite { width: 36px; height: 24px; }
   .ship-sprite::before {
     content: '';
@@ -188,7 +192,7 @@
   @keyframes om-march { from { transform: translateX(-26px); } to { transform: translateX(26px); } }
   @keyframes om-patrol { from { transform: translateX(-104px); } to { transform: translateX(104px); } }
   @keyframes om-bob { from { transform: translateY(0); } to { transform: translateY(4px); } }
-  @keyframes om-laser { 0% { transform: translateY(0); opacity: 1; } 92% { transform: translateY(-168px); opacity: 1; } 93%, 100% { opacity: 0; } }
+  @keyframes om-laser { 0% { bottom: calc(19% + 30px); opacity: 1; } 92% { bottom: calc(88% - 90px); opacity: 1; } 93%, 100% { opacity: 0; } }
   @keyframes om-thrust { from { opacity: 1; } to { opacity: 0.25; } }
   @keyframes om-twinkle { from { opacity: 0.18; } to { opacity: 0.55; } }
   @keyframes om-hit {
@@ -199,7 +203,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .invaders, .invaders .sprite, .row-bottom, .ship, .laser, .thrust, .star-a, .star-d, .star-h {
+    .invaders, .invaders .sprite, .row-bottom, .ship, .laser-wrap, .laser, .thrust, .star-a, .star-d, .star-h {
       animation: none !important;
     }
   }

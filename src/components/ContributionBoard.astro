@@ -21,7 +21,7 @@ const legendLevels = [0, 1, 2, 3, 4];
       {weeks.map((week) => (
         <div class="flex flex-col gap-[3px]" aria-hidden="true">
           {week.days.map((day) => (
-            <div class="w-[9px] h-[9px] rounded-sm" style={`background:${levelColor(day.level)}`}></div>
+            <div class="w-[9px] h-[9px] rounded-sm" style={day ? `background:${levelColor(day.level)}` : ''}></div>
           ))}
         </div>
       ))}

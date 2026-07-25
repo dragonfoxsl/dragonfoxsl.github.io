@@ -5,7 +5,7 @@ export interface Day {
 }
 
 export interface Week {
-  days: Day[];
+  days: (Day | null)[];
 }
 
 const HEAT_RAMP = [
@@ -40,12 +40,17 @@ export function bucketize(counts: number[]): number[] {
 }
 
 export function buildWeeks(days: { date: string; count: number }[]): Week[] {
+  if (days.length === 0) return [];
+
   const levels = bucketize(days.map((d) => d.count));
   const withLevels: Day[] = days.map((d, i) => ({ ...d, level: levels[i] }));
 
+  const leadingPad = new Date(`${withLevels[0].date}T00:00:00Z`).getUTCDay();
+  const cells: (Day | null)[] = [...Array(leadingPad).fill(null), ...withLevels];
+
   const weeks: Week[] = [];
-  for (let i = 0; i < withLevels.length; i += 7) {
-    weeks.push({ days: withLevels.slice(i, i + 7) });
+  for (let i = 0; i < cells.length; i += 7) {
+    weeks.push({ days: cells.slice(i, i + 7) });
   }
   return weeks;
 }
