@@ -1,9 +1,81 @@
 <footer class="border-t border-border mt-10">
   <div class="max-w-[1120px] mx-auto px-6 pt-8 pb-11 flex items-center justify-between gap-5 flex-wrap font-mono text-[11.5px] text-muted">
-    <span>© 2026 Bisina Keshara · built and hosted by hand</span>
-    <div class="flex gap-[18px]">
-      <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener" class="py-3 text-muted hover:text-accent">github</a>
-      <a href="https://medium.com/@bisinet" target="_blank" rel="noopener" class="py-3 text-muted hover:text-accent">medium</a>
+    <div class="flex items-center gap-3">
+      <div class="fellowship" aria-hidden="true">
+        {Array.from({ length: 9 }).map(() => <span class="walker"></span>)}
+      </div>
+      <span>© 2026 Bisina Keshara · <em class="italic">all we have to decide is what to do with the time that is given us</em></span>
+    </div>
+    <div class="flex items-center gap-[18px]">
+      <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener" class="flex items-center gap-1.5 py-3 text-muted hover:text-accent">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.75 5.48.75 11.75c0 5.02 3.26 9.27 7.77 10.77.57.1.78-.25.78-.55 0-.27-.01-1-.02-1.96-3.16.69-3.83-1.52-3.83-1.52-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.52-.29-5.17-1.26-5.17-5.6 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.14 1.16a10.9 10.9 0 0 1 5.72 0c2.18-1.47 3.14-1.16 3.14-1.16.62 1.57.23 2.73.11 3.02.73.79 1.17 1.8 1.17 3.04 0 4.35-2.65 5.31-5.18 5.59.41.35.77 1.04.77 2.1 0 1.52-.01 2.74-.01 3.11 0 .3.2.66.79.55A11.26 11.26 0 0 0 23.25 11.75C23.25 5.48 18.27.5 12 .5Z"/></svg>
+        github
+      </a>
+      <a href="https://medium.com/@bisinet" target="_blank" rel="noopener" class="flex items-center gap-1.5 py-3 text-muted hover:text-accent">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M13.5 12c0 3.72-3 6.75-6.75 6.75S0 15.72 0 12s3-6.75 6.75-6.75 6.75 3.03 6.75 6.75Zm7.36 0c0 3.5-1.5 6.34-3.36 6.34S14.14 15.5 14.14 12s1.5-6.34 3.36-6.34S20.86 8.5 20.86 12ZM24 12c0 3.14-.53 5.68-1.18 5.68-.65 0-1.18-2.54-1.18-5.68S22.17 6.32 22.82 6.32c.65 0 1.18 2.54 1.18 5.68Z"/></svg>
+        medium
+      </a>
+      <div class="balrog" aria-hidden="true"></div>
     </div>
   </div>
 </footer>
+
+<style>
+  .fellowship { display: flex; align-items: flex-end; gap: 2px; height: 9px; }
+  .walker {
+    position: relative;
+    width: 4.5px;
+    height: 7.5px;
+    animation: fw-march 1.2s steps(2) infinite alternate;
+  }
+  .walker::before {
+    content: '';
+    display: block;
+    width: 1.5px;
+    height: 1.5px;
+    background: transparent;
+    box-shadow:
+      1.5px 0 #7D8799,
+      0 1.5px #7D8799, 1.5px 1.5px #7D8799, 3px 1.5px #7D8799,
+      1.5px 3px #7D8799,
+      1.5px 4.5px #7D8799,
+      0 6px #7D8799, 3px 6px #7D8799;
+  }
+  .walker:nth-child(1) { animation-delay: 0s; }
+  .walker:nth-child(2) { animation-delay: 0.13s; }
+  .walker:nth-child(3) { animation-delay: 0.26s; }
+  .walker:nth-child(4) { animation-delay: 0.39s; }
+  .walker:nth-child(5) { animation-delay: 0.52s; }
+  .walker:nth-child(6) { animation-delay: 0.65s; }
+  .walker:nth-child(7) { animation-delay: 0.78s; }
+  .walker:nth-child(8) { animation-delay: 0.91s; }
+  .walker:nth-child(9) { animation-delay: 1.04s; }
+
+  .balrog { position: relative; width: 18px; height: 16px; animation: fw-flicker 1.8s ease-in-out infinite; }
+  .balrog::before {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+      4px 0 #7F1D1D, 12px 0 #7F1D1D,
+      2px 2px #7F1D1D, 4px 2px #7F1D1D, 6px 2px #7F1D1D, 10px 2px #7F1D1D, 12px 2px #7F1D1D, 14px 2px #7F1D1D,
+      0 4px #F97316, 2px 4px #F97316, 4px 4px #F97316, 6px 4px #F97316, 8px 4px #F97316, 10px 4px #F97316, 12px 4px #F97316, 14px 4px #F97316, 16px 4px #F97316,
+      2px 6px #F97316, 4px 6px #F97316, 6px 6px #F97316, 8px 6px #F97316, 10px 6px #F97316, 12px 6px #F97316, 14px 6px #F97316,
+      4px 8px #F97316, 6px 8px #F97316, 8px 8px #F97316, 10px 8px #F97316, 12px 8px #F97316,
+      6px 10px #F97316, 8px 10px #F97316, 10px 10px #F97316,
+      4px 12px #FDBA74, 6px 12px #FDBA74, 8px 12px #FDBA74, 10px 12px #FDBA74, 12px 12px #FDBA74,
+      2px 14px #FDBA74, 6px 14px #FDBA74, 10px 14px #FDBA74, 14px 14px #FDBA74;
+  }
+
+  @keyframes fw-march { from { transform: translateY(0); } to { transform: translateY(-1.5px); } }
+  @keyframes fw-flicker {
+    0%, 100% { opacity: 1; filter: brightness(1); }
+    50% { opacity: 0.88; filter: brightness(1.2); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .walker, .balrog { animation: none !important; }
+  }
+</style>

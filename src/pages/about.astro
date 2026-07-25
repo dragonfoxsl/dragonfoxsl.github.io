@@ -37,10 +37,22 @@ const stack = ['AWS', 'Kubernetes', 'Docker', 'Terraform', 'Python', 'Linux', 'P
         </div>
         <div class="flex flex-col gap-[9px] font-mono text-[12px] text-muted">
           <span>Colombo, Sri Lanka</span>
-          <a href="https://medium.com/@bisinet" target="_blank" rel="noopener">medium.com/@bisinet</a>
-          <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener">github.com/dragonfoxsl</a>
-          <a href="https://lk.linkedin.com/in/bisina-wickremasinghe" target="_blank" rel="noopener">linkedin.com/in/bisina-wickremasinghe</a>
-          <a href="https://ko-fi.com/dragonfoxsl" target="_blank" rel="noopener">ko-fi.com/dragonfoxsl</a>
+          <a href="https://medium.com/@bisinet" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-accent">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M13.5 12c0 3.72-3 6.75-6.75 6.75S0 15.72 0 12s3-6.75 6.75-6.75 6.75 3.03 6.75 6.75Zm7.36 0c0 3.5-1.5 6.34-3.36 6.34S14.14 15.5 14.14 12s1.5-6.34 3.36-6.34S20.86 8.5 20.86 12ZM24 12c0 3.14-.53 5.68-1.18 5.68-.65 0-1.18-2.54-1.18-5.68S22.17 6.32 22.82 6.32c.65 0 1.18 2.54 1.18 5.68Z"/></svg>
+            medium.com/@bisinet
+          </a>
+          <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-accent">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.75 5.48.75 11.75c0 5.02 3.26 9.27 7.77 10.77.57.1.78-.25.78-.55 0-.27-.01-1-.02-1.96-3.16.69-3.83-1.52-3.83-1.52-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.52-.29-5.17-1.26-5.17-5.6 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.14 1.16a10.9 10.9 0 0 1 5.72 0c2.18-1.47 3.14-1.16 3.14-1.16.62 1.57.23 2.73.11 3.02.73.79 1.17 1.8 1.17 3.04 0 4.35-2.65 5.31-5.18 5.59.41.35.77 1.04.77 2.1 0 1.52-.01 2.74-.01 3.11 0 .3.2.66.79.55A11.26 11.26 0 0 0 23.25 11.75C23.25 5.48 18.27.5 12 .5Z"/></svg>
+            github.com/dragonfoxsl
+          </a>
+          <a href="https://lk.linkedin.com/in/bisina-wickremasinghe" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-accent">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+            linkedin.com/in/bisina-wickremasinghe
+          </a>
+          <a href="https://ko-fi.com/dragonfoxsl" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-accent">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M2 3.5h16.5c2.49 0 4.5 2.01 4.5 4.5s-2.01 4.5-4.5 4.5H18c-.28 2.28-1.13 3.94-2.5 5.13-1.62 1.4-3.86 1.87-6.5 1.87H2v-16Zm2 2v12h5c2.24 0 3.9-.4 5-1.35 1.06-.92 1.7-2.31 1.9-4.28.1-1 .1-2 .1-3V5.5H4Zm14.5 1.5H18v5h.5a2.5 2.5 0 0 0 0-5Z"/></svg>
+            ko-fi.com/dragonfoxsl
+          </a>
           <span><span class="text-text">{user.followers}</span> followers · <span class="text-text">{user.following}</span> following</span>
         </div>
         <div class="grid grid-cols-2 gap-px bg-border border border-border rounded-[10px] overflow-hidden font-mono">
