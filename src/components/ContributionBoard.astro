@@ -1,0 +1,33 @@
+---
+import type { Week } from '../lib/contributions';
+import { levelColor } from '../lib/contributions';
+
+interface Props {
+  weeks: Week[];
+  from: string;
+  to: string;
+  totalContributions: number;
+}
+const { weeks, from, to, totalContributions } = Astro.props;
+const legendLevels = [0, 1, 2, 3, 4];
+---
+<div class="bg-surface border border-border rounded-xl p-5 overflow-x-auto">
+  <div
+    class="flex gap-[3px] min-w-[620px]"
+    role="img"
+    aria-label={`Contribution history from ${from} to ${to}: ${totalContributions} total contributions`}
+  >
+    {weeks.map((week) => (
+      <div class="flex flex-col gap-[3px]" aria-hidden="true">
+        {week.days.map((day) => (
+          <div class="w-[9px] h-[9px] rounded-sm" style={`background:${levelColor(day.level)}`}></div>
+        ))}
+      </div>
+    ))}
+  </div>
+  <div class="flex items-center gap-2 mt-4 font-mono text-[10.5px] text-muted" aria-hidden="true">
+    <span>less</span>
+    {legendLevels.map((level) => <span class="w-[9px] h-[9px] rounded-sm" style={`background:${levelColor(level)}`}></span>)}
+    <span>more</span>
+  </div>
+</div>
