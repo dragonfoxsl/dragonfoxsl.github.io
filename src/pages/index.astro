@@ -2,12 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StatusPanel from '../components/StatusPanel.astro';
 import RepoCard from '../components/RepoCard.astro';
-import { getRepos } from '../lib/github';
+import { getRepos, getPinnedRepos } from '../lib/github';
 
 const token = import.meta.env.GITHUB_TOKEN;
 if (!token) throw new Error('GITHUB_TOKEN env var is required to build this site');
 const repos = await getRepos(token);
-const pinned = repos.slice(0, 6);
+const pinned = await getPinnedRepos(token);
 ---
 <BaseLayout
   title="Bisina Keshara — DevOps technical lead"

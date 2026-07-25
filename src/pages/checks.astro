@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RepoRow from '../components/RepoRow.astro';
-import { getRepos } from '../lib/github';
+import { getRepos, getPinnedRepos } from '../lib/github';
 
 const token = import.meta.env.GITHUB_TOKEN;
 if (!token) throw new Error('GITHUB_TOKEN env var is required to build this site');
-const repos = await getRepos(token);
+const [allRepos, pinned] = await Promise.all([getRepos(token), getPinnedRepos(token)]);
+const pinnedNames = new Set(pinned.map((r) => r.name));
+const repos = [...pinned, ...allRepos.filter((r) => !pinnedNames.has(r.name))];
 const totalStars = repos.reduce((sum, r) => sum + r.stars, 0);
 ---
 <BaseLayout

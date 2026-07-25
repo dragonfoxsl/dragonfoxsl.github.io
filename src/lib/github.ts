@@ -84,6 +84,54 @@ export async function getRepos(token: string): Promise<Repo[]> {
   return [...repos, HASH_COMPARE_GIST];
 }
 
+const PINNED_REPOS_QUERY = `
+  query($login: String!) {
+    user(login: $login) {
+      pinnedItems(first: 6, types: [REPOSITORY]) {
+        nodes {
+          ... on Repository {
+            name
+            description
+            url
+            primaryLanguage { name }
+            stargazerCount
+          }
+        }
+      }
+    }
+  }
+`;
+
+interface RawPinnedRepo {
+  name: string;
+  description: string | null;
+  url: string;
+  primaryLanguage: { name: string } | null;
+  stargazerCount: number;
+}
+
+export async function getPinnedRepos(token: string): Promise<Repo[]> {
+  const res = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: { ...authHeaders(token), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: PINNED_REPOS_QUERY, variables: { login: GITHUB_LOGIN } }),
+  });
+  if (!res.ok) throw new Error(`GitHub GraphQL fetch failed: ${res.status}`);
+
+  const json = await res.json();
+  const nodes: RawPinnedRepo[] = json.data.user.pinnedItems.nodes;
+
+  return nodes.map((n) =>
+    mapRepo({
+      name: n.name,
+      description: n.description,
+      html_url: n.url,
+      language: n.primaryLanguage?.name ?? null,
+      stargazers_count: n.stargazerCount,
+    })
+  );
+}
+
 const CONTRIBUTIONS_QUERY = `
   query($login: String!) {
     user(login: $login) {
