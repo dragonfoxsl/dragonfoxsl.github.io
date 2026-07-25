@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #0A0E14; }
+  body { font-family: 'Space Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #38BDF8; text-decoration: none; }
+  a:hover { color: #7DD3FC; }
+  ::selection { background: rgba(56,189,248,.25); color: #E6EAF0; }
+</style>
+</helmet>
+
+<div style="position: relative; min-height: 100vh; background: #0A0E14; color: #E6EAF0; overflow-x: hidden;">
+
+  <sc-if value="{{ atmosphere }}" hint-placeholder-val="{{ true }}">
+    <div style="position: fixed; inset: 0; pointer-events: none; z-index: 0;">
+      <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 72px 72px;"></div>
+      <div style="position: absolute; top: -18%; left: 58%; width: 1100px; height: 1100px; border-radius: 50%; background: radial-gradient(circle, rgba(56,189,248,.10) 0%, rgba(56,189,248,.035) 38%, rgba(10,14,20,0) 70%);"></div>
+      <div style="position: absolute; top: 12%; left: 8%; width: 2px; height: 2px; border-radius: 50%; background: rgba(230,234,240,.45);"></div>
+      <div style="position: absolute; top: 26%; left: 22%; width: 1px; height: 1px; border-radius: 50%; background: rgba(230,234,240,.5);"></div>
+      <div style="position: absolute; top: 9%; left: 41%; width: 1px; height: 1px; border-radius: 50%; background: rgba(230,234,240,.35);"></div>
+      <div style="position: absolute; top: 38%; left: 73%; width: 2px; height: 2px; border-radius: 50%; background: rgba(230,234,240,.3);"></div>
+      <div style="position: absolute; top: 55%; left: 14%; width: 1px; height: 1px; border-radius: 50%; background: rgba(230,234,240,.4);"></div>
+      <div style="position: absolute; top: 68%; left: 88%; width: 2px; height: 2px; border-radius: 50%; background: rgba(230,234,240,.28);"></div>
+      <div style="position: absolute; top: 80%; left: 34%; width: 1px; height: 1px; border-radius: 50%; background: rgba(230,234,240,.35);"></div>
+      <div style="position: absolute; top: 47%; left: 51%; width: 1px; height: 1px; border-radius: 50%; background: rgba(230,234,240,.22);"></div>
+      <div style="position: absolute; top: 91%; left: 66%; width: 1px; height: 1px; border-radius: 50%; background: rgba(230,234,240,.3);"></div>
+      <div style="position: absolute; top: 19%; left: 93%; width: 1px; height: 1px; border-radius: 50%; background: rgba(230,234,240,.32);"></div>
+    </div>
+  </sc-if>
+
+  <div style="position: relative; z-index: 1;">
+
+    <header style="position: sticky; top: 0; z-index: 20; background: rgba(10,14,20,.82); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,.07);">
+      <div style="max-width: 1120px; margin: 0 auto; padding: 12px 24px; min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+        <div onClick="{{ goHome }}" style="display: flex; align-items: baseline; gap: 10px; cursor: pointer;">
+          <span style="font-size: 16px; font-weight: 600; letter-spacing: -.01em;">Bisina Keshara</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7D8799; letter-spacing: .04em;">devops&nbsp;/&nbsp;lead</span>
+        </div>
+        <nav style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 12px;">
+          <span onClick="{{ goHome }}" style="padding: 7px 12px; border-radius: 6px; color: #7D8799; cursor: pointer; letter-spacing: .02em;" style-hover="color: #E6EAF0; background: rgba(255,255,255,.04);">/index</span>
+          <span onClick="{{ goChecks }}" style="padding: 7px 12px; border-radius: 6px; color: #7D8799; cursor: pointer; letter-spacing: .02em;" style-hover="color: #E6EAF0; background: rgba(255,255,255,.04);">/checks</span>
+          <span onClick="{{ goAbout }}" style="padding: 7px 12px; border-radius: 6px; color: #7D8799; cursor: pointer; letter-spacing: .02em;" style-hover="color: #E6EAF0; background: rgba(255,255,255,.04);">/about</span>
+        </nav>
+      </div>
+    </header>
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <main style="max-width: 1120px; margin: 0 auto; padding: 0 24px;">
+
+        <section style="padding: clamp(56px, 9vw, 112px) 0 clamp(48px, 7vw, 88px); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 5vw, 64px); align-items: center;">
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7D8799; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 22px;">Platform &amp; reliability</div>
+            <h1 style="margin: 0 0 24px; font-size: clamp(38px, 5.6vw, 62px); line-height: 1.04; letter-spacing: -.035em; font-weight: 600; text-wrap: balance;">I keep delivery systems boring, observable and fast.</h1>
+            <p style="margin: 0 0 32px; font-size: clamp(16px, 1.5vw, 18px); line-height: 1.65; color: #7D8799; max-width: 48ch; text-wrap: pretty;">DevOps technical lead in Colombo. I build the pipelines, infrastructure and on-call practice behind products that can't afford a bad Tuesday.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+              <span onClick="{{ goChecks }}" style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; padding: 12px 20px; border: 1px solid rgba(56,189,248,.35); border-radius: 8px; color: #38BDF8; cursor: pointer; letter-spacing: .02em;" style-hover="background: rgba(56,189,248,.08); border-color: rgba(56,189,248,.6);">view /checks →</span>
+              <span onClick="{{ goAbout }}" style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; padding: 12px 20px; border: 1px solid rgba(255,255,255,.07); border-radius: 8px; color: #7D8799; cursor: pointer; letter-spacing: .02em;" style-hover="color: #E6EAF0; border-color: rgba(255,255,255,.16);">about me</span>
+            </div>
+          </div>
+
+          <div style="background: #10151E; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,.07);">
+              <span style="font-size: 12.5px; color: #E6EAF0; letter-spacing: .02em;"><span style="color: #7D8799;">GET</span> /status</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #4ADE80; letter-spacing: .04em;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; box-shadow: 0 0 0 3px rgba(74,222,128,.14);"></span>200 OK
+              </span>
+            </div>
+            <div style="padding: 6px 18px 16px;">
+              <div style="display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 12.5px;">
+                <span style="color: #7D8799;">uptime_90d</span><span style="color: #E6EAF0;">99.982%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 12.5px;">
+                <span style="color: #7D8799;">p95_latency</span><span style="color: #E6EAF0;">128ms</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 12.5px;">
+                <span style="color: #7D8799;">deploys_wk</span><span style="color: #E6EAF0;">41</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 12.5px;">
+                <span style="color: #7D8799;">mttr</span><span style="color: #E6EAF0;">11m 04s</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; font-size: 12.5px;">
+                <span style="color: #7D8799;">on_call</span><span style="color: #4ADE80;">available</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style="padding: clamp(40px, 6vw, 72px) 0; border-top: 1px solid rgba(255,255,255,.07);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 32px;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38BDF8; letter-spacing: .06em; margin-bottom: 10px;">/checks</div>
+              <h2 style="margin: 0; font-size: clamp(26px, 3vw, 34px); letter-spacing: -.025em; font-weight: 600;">Selected work</h2>
+            </div>
+            <span onClick="{{ goChecks }}" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38BDF8; cursor: pointer;">all 15 public repositories →</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+            <sc-for list="{{ repos }}" as="r" hint-placeholder-count="6">
+              <a href="{{ r.url }}" target="_blank" rel="noopener" style="background: #10151E; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px; color: inherit;" style-hover="border-color: rgba(56,189,248,.32);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #38BDF8; word-break: break-word;">{{ r.name }}</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #7D8799; border: 1px solid rgba(255,255,255,.07); border-radius: 999px; padding: 3px 9px; flex-shrink: 0;">{{ r.vis }}</span>
+                </div>
+                <p style="margin: 0; font-size: 14.5px; line-height: 1.58; color: #7D8799; text-wrap: pretty;">{{ r.desc }}</p>
+                <div style="margin-top: auto; padding-top: 8px; display: flex; align-items: center; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #7D8799;">
+                  <span style="display: inline-flex; align-items: center; gap: 7px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ r.color }};"></span>{{ r.lang }}</span>
+                  <span>{{ r.stars }}</span>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+      </main>
+    </sc-if>
+
+    <sc-if value="{{ isChecks }}" hint-placeholder-val="{{ false }}">
+      <main style="max-width: 900px; margin: 0 auto; padding: 0 24px;">
+        <section style="padding: clamp(48px, 7vw, 88px) 0 36px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38BDF8; letter-spacing: .06em; margin-bottom: 14px;">/checks</div>
+          <h1 style="margin: 0 0 20px; font-size: clamp(34px, 5vw, 54px); line-height: 1.06; letter-spacing: -.035em; font-weight: 600;">Public repositories</h1>
+          <p style="margin: 0; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.65; color: #7D8799; max-width: 56ch; text-wrap: pretty;">Infrastructure tooling, migration helpers and small utilities. Everything here is public on GitHub.</p>
+        </section>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 16px 20px; background: #10151E; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7D8799; margin-bottom: 8px;">
+          <span><span style="color: #E6EAF0;">15</span> public repositories · <span style="color: #E6EAF0;">263</span> stars given</span>
+          <a href="https://github.com/dragonfoxsl?tab=repositories" target="_blank" rel="noopener">browse all on github →</a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; padding-bottom: 44px;">
+          <sc-for list="{{ repos }}" as="r" hint-placeholder-count="6">
+            <a href="{{ r.url }}" target="_blank" rel="noopener" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 28px; align-items: baseline; padding: 24px 0; border-top: 1px solid rgba(255,255,255,.07); color: inherit;" style-hover="background: rgba(255,255,255,.018);">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #38BDF8; word-break: break-word;">{{ r.name }}</span>
+                <span style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #7D8799;"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ r.color }};"></span>{{ r.lang }} <span>{{ r.stars }}</span></span>
+              </div>
+              <p style="grid-column: span 2; margin: 0; font-size: 15px; line-height: 1.6; color: #7D8799; text-wrap: pretty;">{{ r.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+      </main>
+    </sc-if>
+
+    <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+      <main style="max-width: 1120px; margin: 0 auto; padding: 0 24px;">
+
+        <section style="padding: clamp(44px, 6vw, 76px) 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 4vw, 48px); align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 18px; max-width: 340px;">
+            <img src="https://avatars.githubusercontent.com/u/909787?v=4" alt="Bisina Keshara" style="width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; display: block; background: #10151E;" />
+            <div>
+              <div style="font-size: 26px; font-weight: 600; letter-spacing: -.025em;">Bisina Keshara</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #7D8799; margin-top: 4px;">@dragonfoxsl · devops technical lead</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 9px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7D8799;">
+              <span>Colombo, Sri Lanka</span>
+              <a href="https://medium.com/@bisinet" target="_blank" rel="noopener">medium.com/@bisinet</a>
+              <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener">github.com/dragonfoxsl</a>
+              <span><span style="color: #E6EAF0;">4</span> followers · <span style="color: #E6EAF0;">5</span> following</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.07); border-radius: 10px; overflow: hidden; font-family: 'JetBrains Mono', monospace;">
+              <div style="background: #10151E; padding: 14px 12px;">
+                <div style="font-size: 18px; color: #E6EAF0;">15</div>
+                <div style="font-size: 10px; color: #7D8799; letter-spacing: .1em; text-transform: uppercase; margin-top: 5px;">repos</div>
+              </div>
+              <div style="background: #10151E; padding: 14px 12px;">
+                <div style="font-size: 18px; color: #E6EAF0;">263</div>
+                <div style="font-size: 10px; color: #7D8799; letter-spacing: .1em; text-transform: uppercase; margin-top: 5px;">stars</div>
+              </div>
+              <div style="background: #10151E; padding: 14px 12px;">
+                <div style="font-size: 18px; color: #E6EAF0;">9y</div>
+                <div style="font-size: 10px; color: #7D8799; letter-spacing: .1em; text-transform: uppercase; margin-top: 5px;">shipping</div>
+              </div>
+            </div>
+            <span style="align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 8px 14px; border: 1px solid rgba(74,222,128,.32); border-radius: 999px; color: #4ADE80;">mentoring · open</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 26px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38BDF8; letter-spacing: .06em;">/about</div>
+            <p style="margin: 0; font-size: 17.5px; line-height: 1.72; color: #E6EAF0; text-wrap: pretty;">I lead a platform team. Most of what I do is remove reasons for people to page each other at 3am.</p>
+            <p style="margin: 0; font-size: 16.5px; line-height: 1.72; color: #7D8799; text-wrap: pretty;">I started in support, moved to sysadmin work when the servers stopped being someone else's problem, and have spent the last eight years on delivery infrastructure — build systems, deployment tooling, observability, and the human process wrapped around all three. I care more about the process than the tools; the tools are just where the process becomes enforceable.</p>
+            <p style="margin: 0; font-size: 16.5px; line-height: 1.72; color: #7D8799; text-wrap: pretty;">The work I'm proudest of is rarely visible. A deploy that nobody watched. A runbook nobody had to open. An alert that fired once, correctly, and then never again because the underlying thing got fixed.</p>
+            <p style="margin: 0; font-size: 16.5px; line-height: 1.72; color: #7D8799; text-wrap: pretty;">Longer notes on all of this live on Medium. Smaller experiments end up on GitHub, usually as a script that started as a one-off and refused to stay one.</p>
+
+            <div style="border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7D8799; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 18px;">Trajectory</div>
+              <div style="display: flex; flex-direction: column;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.05);">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #7D8799;">2023 — now</span>
+                  <div><div style="font-size: 15.5px; font-weight: 500;">DevOps technical lead</div></div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.05);">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #7D8799;">2020 — 2023</span>
+                  <div><div style="font-size: 15.5px; font-weight: 500;">Senior platform engineer</div></div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 4px 24px; padding: 14px 0;">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #7D8799;">2017 — 2020</span>
+                  <div><div style="font-size: 15.5px; font-weight: 500;">Infrastructure engineer</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7D8799; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px;">Day to day</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px;">
+                <span style="padding: 6px 11px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; color: #7D8799;">Terraform</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; color: #7D8799;">OpenTofu</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; color: #7D8799;">AWS</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; color: #7D8799;">Kubernetes</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; color: #7D8799;">Python</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; color: #7D8799;">Go</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(255,255,255,.07); border-radius: 6px; color: #7D8799;">PowerShell</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style="padding: clamp(36px, 5vw, 60px) 0; border-top: 1px solid rgba(255,255,255,.07);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38BDF8; letter-spacing: .06em; margin-bottom: 10px;">/contributions</div>
+              <h2 style="margin: 0; font-size: clamp(24px, 2.8vw, 30px); letter-spacing: -.025em; font-weight: 600;">Contribution board</h2>
+            </div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #7D8799;">jul 2025 — jul 2026 · sample data</span>
+          </div>
+          <div style="background: #10151E; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 20px; overflow-x: auto;">
+            <div style="display: flex; gap: 3px; min-width: 620px;">
+              <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="53">
+                <div style="display: flex; flex-direction: column; gap: 3px;">
+                  <sc-for list="{{ w.days }}" as="d" hint-placeholder-count="7">
+                    <div style="width: 9px; height: 9px; border-radius: 2px; background: {{ d.c }};"></div>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #7D8799;">
+              <span>less</span>
+              <span style="width: 9px; height: 9px; border-radius: 2px; background: #161D28;"></span>
+              <span style="width: 9px; height: 9px; border-radius: 2px; background: rgba(74,222,128,.22);"></span>
+              <span style="width: 9px; height: 9px; border-radius: 2px; background: rgba(74,222,128,.45);"></span>
+              <span style="width: 9px; height: 9px; border-radius: 2px; background: rgba(74,222,128,.72);"></span>
+              <span style="width: 9px; height: 9px; border-radius: 2px; background: #4ADE80;"></span>
+              <span>more</span>
+            </div>
+          </div>
+        </section>
+
+        <section style="padding: clamp(36px, 5vw, 60px) 0 24px; border-top: 1px solid rgba(255,255,255,.07);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7D8799; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px;">dragonfoxsl/dragonfoxsl · README.md</div>
+          <div style="border: 1px solid rgba(255,255,255,.07); border-radius: 12px; overflow: hidden;">
+            <dc-import name="Space Scene" hint-size="100%,520px"></dc-import>
+          </div>
+        </section>
+      </main>
+    </sc-if>
+
+    <footer style="border-top: 1px solid rgba(255,255,255,.07); margin-top: 40px;">
+      <div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px 44px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #7D8799;">
+        <span>© 2026 Bisina Keshara · built and hosted by hand</span>
+        <div style="display: flex; gap: 18px;">
+          <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener" style="color: #7D8799;" style-hover="color: #38BDF8;">github</a>
+          <a href="https://medium.com/@bisinet" target="_blank" rel="noopener" style="color: #7D8799;" style-hover="color: #38BDF8;">medium</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;checks&quot;,&quot;about&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;},&quot;atmosphere&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Page&quot;}}">
+class Component extends DCLogic {
+  state = { page: null };
+
+  get page() {
+    return this.state.page || this.props.startPage || 'home';
+  }
+
+  go = (page) => {
+    this.setState({ page }, () => {
+      if (typeof window !== 'undefined') window.scrollTo(0, 0);
+    });
+  };
+
+  renderVals() {
+    const p = this.page;
+
+    const repos = [
+      { name: 'terraform-opentofu-migration-sample', vis: 'public', desc: 'Sample Terraform configuration to test OpenTofu migration.', lang: 'HCL', color: '#7D8799', stars: '★ 1', url: 'https://github.com/dragonfoxsl/terraform-opentofu-migration-sample' },
+      { name: 'aws-dms-mapping-generator', vis: 'public', desc: 'Generates AWS DMS table mappings instead of writing the JSON by hand.', lang: 'Python', color: '#4ADE80', stars: '', url: 'https://github.com/dragonfoxsl/aws-dms-mapping-generator' },
+      { name: 'image_bg_removal', vis: 'public', desc: 'Remove background from a given set of images.', lang: 'Python', color: '#4ADE80', stars: '', url: 'https://github.com/dragonfoxsl/image_bg_removal' },
+      { name: 'os-download', vis: 'public', desc: 'Automate multiple OS downloads — keeps the ISO set updated.', lang: 'Python', color: '#4ADE80', stars: '', url: 'https://github.com/dragonfoxsl/os-download' },
+      { name: 'timezone-compare', vis: 'public', desc: 'Compare times across zones from the terminal.', lang: 'Go', color: '#38BDF8', stars: '', url: 'https://github.com/dragonfoxsl/timezone-compare' },
+      { name: 'hash-compare', vis: 'gist', desc: 'Small utility to compare hash values of a file.', lang: 'PowerShell', color: '#E6EAF0', stars: '★ 1', url: 'https://gist.github.com/dragonfoxsl/fa086bec2e195136266832f73bf81367' }
+    ];
+
+    const shades = ['#161D28', 'rgba(74,222,128,.22)', 'rgba(74,222,128,.45)', 'rgba(74,222,128,.72)', '#4ADE80'];
+    const weeks = [];
+    let seed = 7;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    for (let w = 0; w < 53; w++) {
+      const days = [];
+      for (let d = 0; d < 7; d++) {
+        const weekend = d === 0 || d === 6;
+        const r = rnd();
+        let lvl = r > 0.82 ? 4 : r > 0.62 ? 3 : r > 0.38 ? 2 : r > 0.18 ? 1 : 0;
+        if (weekend && r < 0.72) lvl = Math.max(0, lvl - 2);
+        days.push({ c: shades[lvl] });
+      }
+      weeks.push({ days });
+    }
+
+    return {
+      isHome: p === 'home', isChecks: p === 'checks', isAbout: p === 'about',
+      goHome: () => this.go('home'),
+      goChecks: () => this.go('checks'),
+      goAbout: () => this.go('about'),
+      atmosphere: this.props.atmosphere ?? true,
+      repos, weeks
+    };
+  }
+}
+</script>
+</body>
+</html>

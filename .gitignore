@@ -1,0 +1,8 @@
+.claude/
+CLAUDE.md
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
