@@ -33,11 +33,22 @@
         <div class="sprite invader-a"></div>
         <div class="sprite invader-a"></div>
         <div class="sprite invader-a"></div>
+        <div class="sprite invader-a"></div>
+        <div class="sprite invader-a"></div>
+      </div>
+      <div class="row row-mid">
+        <div class="sprite invader-b"></div>
+        <div class="sprite invader-b"></div>
+        <div class="sprite invader-b"></div>
+        <div class="sprite invader-b"></div>
+        <div class="sprite invader-b"></div>
       </div>
       <div class="row row-bottom">
-        <div class="sprite invader-b"></div>
-        <div class="sprite invader-b"></div>
-        <div class="sprite invader-b"></div>
+        <div class="sprite invader-a"></div>
+        <div class="sprite invader-a"></div>
+        <div class="sprite invader-a"></div>
+        <div class="sprite invader-a"></div>
+        <div class="sprite invader-a"></div>
       </div>
     </div>
 
@@ -52,7 +63,7 @@
 
   <div class="flex items-center justify-between gap-4 flex-wrap px-[18px] py-[13px] border-t border-border text-[11.5px] text-muted">
     <span>wave <span class="text-text">07</span></span>
-    <span>hostiles <span class="text-text">06</span></span>
+    <span>hostiles <span class="text-text">15</span></span>
     <span>shields <span class="text-signal">nominal</span></span>
     <span>renderer <span class="text-text">css</span></span>
   </div>
@@ -106,11 +117,31 @@
   .crater-d { top: 4%; left: 70%; width: 5%; padding-bottom: 5%; background: rgba(10, 14, 20, 0.3); }
   .crater-e { top: 13%; left: 11%; width: 8%; padding-bottom: 8%; background: rgba(10, 14, 20, 0.26); }
 
-  .invaders { position: absolute; top: 14%; left: 50%; margin-left: -136px; animation: om-march 5s steps(9) infinite alternate; }
-  .row { display: flex; gap: 32px; }
-  .row-top { margin-bottom: 22px; }
+  .invaders { position: absolute; top: 12%; left: 50%; margin-left: -116px; animation: om-march 5s steps(9) infinite alternate; }
+  .row { display: flex; gap: 18px; }
+  .row-top { margin-bottom: 16px; }
+  .row-mid { margin-bottom: 16px; }
   .row-bottom { animation: om-bob 1.1s steps(2) infinite alternate; }
   .sprite { width: 32px; height: 24px; }
+  .invaders .sprite {
+    animation: om-hit 1.3s steps(1) infinite;
+    transform-origin: 50% 50%;
+  }
+  .row-top .sprite:nth-child(1) { animation-delay: 0s; }
+  .row-top .sprite:nth-child(2) { animation-delay: 0.09s; }
+  .row-top .sprite:nth-child(3) { animation-delay: 0.18s; }
+  .row-top .sprite:nth-child(4) { animation-delay: 0.27s; }
+  .row-top .sprite:nth-child(5) { animation-delay: 0.36s; }
+  .row-mid .sprite:nth-child(1) { animation-delay: 0.45s; }
+  .row-mid .sprite:nth-child(2) { animation-delay: 0.54s; }
+  .row-mid .sprite:nth-child(3) { animation-delay: 0.63s; }
+  .row-mid .sprite:nth-child(4) { animation-delay: 0.72s; }
+  .row-mid .sprite:nth-child(5) { animation-delay: 0.81s; }
+  .row-bottom .sprite:nth-child(1) { animation-delay: 0.9s; }
+  .row-bottom .sprite:nth-child(2) { animation-delay: 0.99s; }
+  .row-bottom .sprite:nth-child(3) { animation-delay: 1.08s; }
+  .row-bottom .sprite:nth-child(4) { animation-delay: 1.17s; }
+  .row-bottom .sprite:nth-child(5) { animation-delay: 1.26s; }
   .sprite::before { content: ''; display: block; width: 4px; height: 4px; background: transparent; }
   .invader-a::before {
     box-shadow: 4px 0 #38bdf8, 8px 0 #38bdf8, 12px 0 #38bdf8, 16px 0 #38bdf8, 20px 0 #38bdf8, 24px 0 #38bdf8,
@@ -160,9 +191,15 @@
   @keyframes om-laser { 0% { transform: translateY(0); opacity: 1; } 92% { transform: translateY(-168px); opacity: 1; } 93%, 100% { opacity: 0; } }
   @keyframes om-thrust { from { opacity: 1; } to { opacity: 0.25; } }
   @keyframes om-twinkle { from { opacity: 0.18; } to { opacity: 0.55; } }
+  @keyframes om-hit {
+    0% { opacity: 1; transform: scale(1); filter: brightness(1); }
+    2% { opacity: 1; transform: scale(1.35); filter: brightness(2.6); }
+    4% { opacity: 0.1; transform: scale(0.5); filter: brightness(2.6); }
+    9%, 100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .invaders, .row-bottom, .ship, .laser, .thrust, .star-a, .star-d, .star-h {
+    .invaders, .invaders .sprite, .row-bottom, .ship, .laser, .thrust, .star-a, .star-d, .star-h {
       animation: none !important;
     }
   }

@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContributionBoard from '../components/ContributionBoard.astro';
 import SpaceScene from '../components/SpaceScene.astro';
 import { getRepos, getContributionDays, getUser } from '../lib/github';
-import { buildWeeks, formatMonthYear, yearsSince } from '../lib/contributions';
+import { buildWeeks, formatMonthYear } from '../lib/contributions';
 
 const token = import.meta.env.GITHUB_TOKEN;
 if (!token) throw new Error('GITHUB_TOKEN env var is required to build this site');
@@ -16,18 +16,12 @@ const weeks = buildWeeks(days);
 const totalContributions = days.reduce((sum, d) => sum + d.count, 0);
 
 const user = await getUser(token);
-const accountAgeYears = yearsSince(user.createdAt);
 
-const trajectory = [
-  { range: '2023 — now', role: 'DevOps technical lead' },
-  { range: '2020 — 2023', role: 'Senior platform engineer' },
-  { range: '2017 — 2020', role: 'Infrastructure engineer' },
-];
-const stack = ['Terraform', 'OpenTofu', 'AWS', 'Kubernetes', 'Python', 'Go', 'PowerShell'];
+const stack = ['Python', 'Terraform', 'OpenTofu', 'AWS', 'Docker', 'Go', 'JavaScript', 'GitHub Actions', 'PowerShell'];
 ---
 <BaseLayout
   title="About — Bisina Keshara"
-  description="DevOps technical lead: trajectory, stack, and activity."
+  description="DevOps technical lead: stack and activity."
 >
   <main class="max-w-[1120px] mx-auto px-6">
     <section class="grid [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] gap-[clamp(28px,4vw,48px)] items-start pt-[clamp(44px,6vw,76px)] pb-10">
@@ -47,7 +41,7 @@ const stack = ['Terraform', 'OpenTofu', 'AWS', 'Kubernetes', 'Python', 'Go', 'Po
           <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener">github.com/dragonfoxsl</a>
           <span><span class="text-text">{user.followers}</span> followers · <span class="text-text">{user.following}</span> following</span>
         </div>
-        <div class="grid grid-cols-3 gap-px bg-border border border-border rounded-[10px] overflow-hidden font-mono">
+        <div class="grid grid-cols-2 gap-px bg-border border border-border rounded-[10px] overflow-hidden font-mono">
           <div class="bg-surface px-3 py-3.5">
             <div class="text-[18px] text-text">{repos.length}</div>
             <div class="text-[10px] text-muted tracking-[.1em] uppercase mt-[5px]">repos</div>
@@ -55,10 +49,6 @@ const stack = ['Terraform', 'OpenTofu', 'AWS', 'Kubernetes', 'Python', 'Go', 'Po
           <div class="bg-surface px-3 py-3.5">
             <div class="text-[18px] text-text">{totalStars}</div>
             <div class="text-[10px] text-muted tracking-[.1em] uppercase mt-[5px]">stars</div>
-          </div>
-          <div class="bg-surface px-3 py-3.5">
-            <div class="text-[18px] text-text">{accountAgeYears}y</div>
-            <div class="text-[10px] text-muted tracking-[.1em] uppercase mt-[5px]">on github</div>
           </div>
         </div>
         <span class="self-start font-mono text-[11.5px] px-[14px] py-2 border border-signal-border rounded-full text-signal">mentoring · open</span>
@@ -70,18 +60,6 @@ const stack = ['Terraform', 'OpenTofu', 'AWS', 'Kubernetes', 'Python', 'Go', 'Po
         <p class="m-0 text-[16.5px] leading-[1.72] text-muted [text-wrap:pretty]">I started in support, moved to sysadmin work when the servers stopped being someone else's problem, and have spent the last eight years on delivery infrastructure — build systems, deployment tooling, observability, and the human process wrapped around all three. I care more about the process than the tools; the tools are just where the process becomes enforceable.</p>
         <p class="m-0 text-[16.5px] leading-[1.72] text-muted [text-wrap:pretty]">The work I'm proudest of is rarely visible. A deploy that nobody watched. A runbook nobody had to open. An alert that fired once, correctly, and then never again because the underlying thing got fixed.</p>
         <p class="m-0 text-[16.5px] leading-[1.72] text-muted [text-wrap:pretty]">Longer notes on all of this live on Medium. Smaller experiments end up on GitHub, usually as a script that started as a one-off and refused to stay one.</p>
-
-        <div class="border-t border-border pt-[26px]">
-          <div class="font-mono text-[11px] text-muted tracking-[.14em] uppercase mb-[18px]">Trajectory</div>
-          <div class="flex flex-col">
-            {trajectory.map((item, i) => (
-              <div class:list={['grid [grid-template-columns:repeat(auto-fit,minmax(180px,1fr))] gap-x-6 gap-y-1 py-[14px]', i < trajectory.length - 1 && 'border-b border-border-subtle']}>
-                <span class="font-mono text-[11.5px] text-muted">{item.range}</span>
-                <div class="text-[15.5px] font-medium">{item.role}</div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         <div class="border-t border-border pt-[26px]">
           <div class="font-mono text-[11px] text-muted tracking-[.14em] uppercase mb-4">Day to day</div>
