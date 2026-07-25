@@ -19,8 +19,10 @@ export default {
         'accent-border-hover': 'rgba(56,189,248,.6)',
         'accent-card-hover': 'rgba(56,189,248,.32)',
         signal: '#4ADE80',
+        'signal-border': 'rgba(74,222,128,.32)',
         'row-hover': 'rgba(255,255,255,.018)',
         selection: 'rgba(56,189,248,.25)',
+        'header-fill': 'rgba(10,14,20,.82)',
       },
       fontFamily: {
         display: ['"Space Grotesk Variable"', 'system-ui', 'sans-serif'],

@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
 
+:root {
+  --atmosphere-line: rgba(255, 255, 255, 0.028);
+  --atmosphere-glow: rgba(56, 189, 248, 0.1);
+  --atmosphere-glow-mid: rgba(56, 189, 248, 0.035);
+  --atmosphere-glow-end: rgba(10, 14, 20, 0);
+}
+
 ::selection {
   background: rgba(56, 189, 248, 0.25);
   color: #e6eaf0;

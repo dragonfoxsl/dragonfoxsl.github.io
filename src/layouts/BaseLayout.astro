@@ -21,8 +21,8 @@ const { title, description } = Astro.props;
 </head>
 <body class="relative min-h-screen bg-bg text-text font-display antialiased overflow-x-hidden">
   <div class="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
-    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 72px 72px;"></div>
-    <div class="absolute rounded-full" style="top: -18%; left: 58%; width: 1100px; height: 1100px; background: radial-gradient(circle, rgba(56,189,248,.10) 0%, rgba(56,189,248,.035) 38%, rgba(10,14,20,0) 70%);"></div>
+    <div class="absolute inset-0" style="background-image: linear-gradient(var(--atmosphere-line) 1px, transparent 1px), linear-gradient(90deg, var(--atmosphere-line) 1px, transparent 1px); background-size: 72px 72px;"></div>
+    <div class="absolute rounded-full" style="top: -18%; left: 58%; width: 1100px; height: 1100px; background: radial-gradient(circle, var(--atmosphere-glow) 0%, var(--atmosphere-glow-mid) 38%, var(--atmosphere-glow-end) 70%);"></div>
     <div class="absolute rounded-full bg-text" style="top: 12%; left: 8%; width: 2px; height: 2px; opacity: .45;"></div>
     <div class="absolute rounded-full bg-text" style="top: 26%; left: 22%; width: 1px; height: 1px; opacity: .5;"></div>
     <div class="absolute rounded-full bg-text" style="top: 9%; left: 41%; width: 1px; height: 1px; opacity: .35;"></div>

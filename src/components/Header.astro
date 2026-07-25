@@ -6,7 +6,7 @@ const nav = [
 ];
 const currentPath = Astro.url.pathname.replace(/(.)\/$/, '$1');
 ---
-<header class="sticky top-0 z-20 bg-[rgba(10,14,20,.82)] backdrop-blur-[14px] border-b border-border">
+<header class="sticky top-0 z-20 bg-header-fill backdrop-blur-[14px] border-b border-border">
   <div class="max-w-[1120px] mx-auto px-6 py-3 min-h-[68px] flex items-center justify-between gap-x-6 gap-y-3 flex-wrap">
     <a href="/" class="flex items-baseline gap-2.5">
       <span class="text-[16px] font-semibold tracking-[-.01em]">Bisina Keshara</span>
@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname.replace(/(.)\/$/, '$1');
         <a
           href={item.href}
           class:list={[
-            'px-3 py-[7px] rounded-md tracking-[.02em] hover:text-text hover:bg-white/[.04]',
+            'px-3 py-3 rounded-md tracking-[.02em] hover:text-text hover:bg-white/[.04]',
             currentPath === item.href ? 'text-text' : 'text-muted',
           ]}
         >{item.label}</a>
