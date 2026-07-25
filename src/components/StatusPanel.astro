@@ -1,0 +1,25 @@
+---
+const rows = [
+  { key: 'uptime_90d', value: '99.982%' },
+  { key: 'p95_latency', value: '128ms' },
+  { key: 'deploys_wk', value: '41' },
+  { key: 'mttr', value: '11m 04s' },
+  { key: 'on_call', value: 'available', signal: true },
+];
+---
+<div class="bg-surface border border-border rounded-xl overflow-hidden font-mono">
+  <div class="flex items-center justify-between gap-4 px-[18px] py-[14px] border-b border-border">
+    <span class="text-[12.5px] text-text tracking-[.02em]"><span class="text-muted">GET</span> /status</span>
+    <span class="inline-flex items-center gap-2 text-[12px] text-signal tracking-[.04em]">
+      <span class="w-1.5 h-1.5 rounded-full bg-signal shadow-[0_0_0_3px_rgba(74,222,128,.14)]"></span>200 OK
+    </span>
+  </div>
+  <div class="px-[18px] pb-4 pt-1.5">
+    {rows.map((row, i) => (
+      <div class:list={['flex justify-between gap-4 py-[11px] text-[12.5px]', i < rows.length - 1 && 'border-b border-border-subtle']}>
+        <span class="text-muted">{row.key}</span>
+        <span class:list={[row.signal ? 'text-signal' : 'text-text']}>{row.value}</span>
+      </div>
+    ))}
+  </div>
+</div>
