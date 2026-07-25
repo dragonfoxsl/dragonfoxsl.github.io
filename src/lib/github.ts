@@ -13,6 +13,12 @@ export interface ContributionDay {
   count: number;
 }
 
+export interface GitHubUser {
+  followers: number;
+  following: number;
+  createdAt: string;
+}
+
 const LANGUAGE_COLORS: Record<string, string> = {
   HCL: '#7D8799',
   Python: '#4ADE80',
@@ -117,4 +123,18 @@ export async function getContributionDays(
   if (days.length === 0) throw new Error('GitHub contribution calendar returned no days');
 
   return { days, from: days[0].date, to: days[days.length - 1].date };
+}
+
+export async function getUser(token: string): Promise<GitHubUser> {
+  const res = await fetch(`https://api.github.com/users/${GITHUB_LOGIN}`, {
+    headers: authHeaders(token),
+  });
+  if (!res.ok) throw new Error(`GitHub user fetch failed: ${res.status}`);
+
+  const data = await res.json();
+  return {
+    followers: data.followers,
+    following: data.following,
+    createdAt: data.created_at,
+  };
 }

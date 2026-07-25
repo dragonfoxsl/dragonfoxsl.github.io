@@ -2,8 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContributionBoard from '../components/ContributionBoard.astro';
 import SpaceScene from '../components/SpaceScene.astro';
-import { getRepos, getContributionDays } from '../lib/github';
-import { buildWeeks, formatMonthYear } from '../lib/contributions';
+import { getRepos, getContributionDays, getUser } from '../lib/github';
+import { buildWeeks, formatMonthYear, yearsSince } from '../lib/contributions';
 
 const token = import.meta.env.GITHUB_TOKEN;
 if (!token) throw new Error('GITHUB_TOKEN env var is required to build this site');
@@ -14,6 +14,9 @@ const totalStars = repos.reduce((sum, r) => sum + r.stars, 0);
 const { days, from, to } = await getContributionDays(token);
 const weeks = buildWeeks(days);
 const totalContributions = days.reduce((sum, d) => sum + d.count, 0);
+
+const user = await getUser(token);
+const accountAgeYears = yearsSince(user.createdAt);
 
 const trajectory = [
   { range: '2023 — now', role: 'DevOps technical lead' },
@@ -42,7 +45,7 @@ const stack = ['Terraform', 'OpenTofu', 'AWS', 'Kubernetes', 'Python', 'Go', 'Po
           <span>Colombo, Sri Lanka</span>
           <a href="https://medium.com/@bisinet" target="_blank" rel="noopener">medium.com/@bisinet</a>
           <a href="https://github.com/dragonfoxsl" target="_blank" rel="noopener">github.com/dragonfoxsl</a>
-          <span><span class="text-text">4</span> followers · <span class="text-text">5</span> following</span>
+          <span><span class="text-text">{user.followers}</span> followers · <span class="text-text">{user.following}</span> following</span>
         </div>
         <div class="grid grid-cols-3 gap-px bg-border border border-border rounded-[10px] overflow-hidden font-mono">
           <div class="bg-surface px-3 py-3.5">
@@ -54,8 +57,8 @@ const stack = ['Terraform', 'OpenTofu', 'AWS', 'Kubernetes', 'Python', 'Go', 'Po
             <div class="text-[10px] text-muted tracking-[.1em] uppercase mt-[5px]">stars</div>
           </div>
           <div class="bg-surface px-3 py-3.5">
-            <div class="text-[18px] text-text">9y</div>
-            <div class="text-[10px] text-muted tracking-[.1em] uppercase mt-[5px]">shipping</div>
+            <div class="text-[18px] text-text">{accountAgeYears}y</div>
+            <div class="text-[10px] text-muted tracking-[.1em] uppercase mt-[5px]">on github</div>
           </div>
         </div>
         <span class="self-start font-mono text-[11.5px] px-[14px] py-2 border border-[rgba(74,222,128,.32)] rounded-full text-signal">mentoring · open</span>

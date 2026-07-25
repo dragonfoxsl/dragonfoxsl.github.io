@@ -54,3 +54,16 @@ export function formatMonthYear(isoDate: string): string {
   const d = new Date(isoDate);
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toLowerCase();
 }
+
+export function yearsSince(isoDate: string): number {
+  const start = new Date(isoDate);
+  const now = new Date();
+
+  let years = now.getUTCFullYear() - start.getUTCFullYear();
+  const anniversaryPassed =
+    now.getUTCMonth() > start.getUTCMonth() ||
+    (now.getUTCMonth() === start.getUTCMonth() && now.getUTCDate() >= start.getUTCDate());
+  if (!anniversaryPassed) years -= 1;
+
+  return years;
+}

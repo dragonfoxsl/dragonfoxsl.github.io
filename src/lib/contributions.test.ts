@@ -1,5 +1,9 @@
-import { describe, it, expect } from 'vitest';
-import { bucketize, buildWeeks, levelColor, formatMonthYear } from './contributions';
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { bucketize, buildWeeks, levelColor, formatMonthYear, yearsSince } from './contributions';
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 describe('bucketize', () => {
   it('assigns level 0 to zero counts and spreads the rest across quartiles', () => {
@@ -42,5 +46,19 @@ describe('buildWeeks', () => {
 describe('formatMonthYear', () => {
   it('formats an ISO date as lowercase "mon yyyy"', () => {
     expect(formatMonthYear('2025-07-26')).toBe('jul 2025');
+  });
+});
+
+describe('yearsSince', () => {
+  it('counts a full year once the anniversary date has passed', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-07-25T00:00:00Z'));
+    expect(yearsSince('2017-01-01T00:00:00Z')).toBe(9);
+  });
+
+  it('does not count the current year until the anniversary date arrives', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-07-25T00:00:00Z'));
+    expect(yearsSince('2017-12-31T00:00:00Z')).toBe(8);
   });
 });

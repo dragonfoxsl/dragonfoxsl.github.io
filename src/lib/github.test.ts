@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { mapRepo, getRepos, getContributionDays } from './github';
+import { mapRepo, getRepos, getContributionDays, getUser } from './github';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -137,5 +137,35 @@ describe('getContributionDays', () => {
     ]);
     expect(result.from).toBe('2025-07-27');
     expect(result.to).toBe('2025-08-03');
+  });
+});
+
+describe('getUser', () => {
+  it('maps the GitHub user response to followers/following/createdAt', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          login: 'dragonfoxsl',
+          followers: 4,
+          following: 5,
+          created_at: '2017-01-01T00:00:00Z',
+        }),
+      })
+    );
+
+    const user = await getUser('fake-token');
+
+    expect(user).toEqual({
+      followers: 4,
+      following: 5,
+      createdAt: '2017-01-01T00:00:00Z',
+    });
+  });
+
+  it('throws when the GitHub API responds with a non-OK status', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 404 }));
+    await expect(getUser('fake-token')).rejects.toThrow('404');
   });
 });
