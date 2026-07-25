@@ -1,0 +1,43 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+</head>
+<body class="relative min-h-screen bg-bg text-text font-display antialiased overflow-x-hidden">
+  <div class="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
+    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 72px 72px;"></div>
+    <div class="absolute rounded-full" style="top: -18%; left: 58%; width: 1100px; height: 1100px; background: radial-gradient(circle, rgba(56,189,248,.10) 0%, rgba(56,189,248,.035) 38%, rgba(10,14,20,0) 70%);"></div>
+    <div class="absolute rounded-full bg-text" style="top: 12%; left: 8%; width: 2px; height: 2px; opacity: .45;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 26%; left: 22%; width: 1px; height: 1px; opacity: .5;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 9%; left: 41%; width: 1px; height: 1px; opacity: .35;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 38%; left: 73%; width: 2px; height: 2px; opacity: .3;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 55%; left: 14%; width: 1px; height: 1px; opacity: .4;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 68%; left: 88%; width: 2px; height: 2px; opacity: .28;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 80%; left: 34%; width: 1px; height: 1px; opacity: .35;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 47%; left: 51%; width: 1px; height: 1px; opacity: .22;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 91%; left: 66%; width: 1px; height: 1px; opacity: .3;"></div>
+    <div class="absolute rounded-full bg-text" style="top: 19%; left: 93%; width: 1px; height: 1px; opacity: .32;"></div>
+  </div>
+  <div class="relative z-10">
+    <Header />
+    <slot />
+    <Footer />
+  </div>
+</body>
+</html>
