@@ -29,7 +29,11 @@
   fix, not preserve).
 - This repo is a GitHub Pages **user site** (`dragonfoxsl.github.io`, public
   repo) — `astro.config.mjs` sets `site` with no `base` path.
-- Package manager: npm. Node version: 20.
+- Package manager: npm. Node version: **22.12+** (revised during Task 1 — the
+  Astro 7 scaffold and its `@astrojs/compiler-rs` dependency require Node
+  ≥22.12.0; the plan originally said Node 20, which is incompatible with the
+  toolchain actually installed. Task 12's GitHub Actions workflow must use
+  `node-version: 22`, not `20`.)
 - Do not add a co-author trailer to commits (per explicit user instruction
   earlier in this session). Do not commit `.claude/` or a `CLAUDE.md` (already
   excluded via `.gitignore`).
@@ -1497,7 +1501,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
       - run: npm test
