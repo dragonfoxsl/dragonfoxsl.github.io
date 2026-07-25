@@ -1,5 +1,8 @@
 .claude/
 CLAUDE.md
+PRODUCT.md
+DESIGN.md
+.impeccable/
 node_modules/
 dist/
 .astro/
