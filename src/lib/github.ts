@@ -114,5 +114,7 @@ export async function getContributionDays(
     w.contributionDays.map((d) => ({ date: d.date, count: d.contributionCount }))
   );
 
+  if (days.length === 0) throw new Error('GitHub contribution calendar returned no days');
+
   return { days, from: days[0].date, to: days[days.length - 1].date };
 }
