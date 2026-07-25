@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RepoRow from '../components/RepoRow.astro';
+import { getRepos } from '../lib/github';
+
+const token = import.meta.env.GITHUB_TOKEN;
+if (!token) throw new Error('GITHUB_TOKEN env var is required to build this site');
+const repos = await getRepos(token);
+const totalStars = repos.reduce((sum, r) => sum + r.stars, 0);
+---
+<BaseLayout
+  title="Public repositories — Bisina Keshara"
+  description="Infrastructure tooling, migration helpers and small utilities."
+>
+  <main class="max-w-[900px] mx-auto px-6">
+    <section class="pt-[clamp(48px,7vw,88px)] pb-9">
+      <div class="font-mono text-[12px] text-accent tracking-[.06em] mb-3.5">/checks</div>
+      <h1 class="m-0 mb-5 text-[clamp(34px,5vw,54px)] leading-[1.06] tracking-[-.035em] font-semibold">Public repositories</h1>
+      <p class="m-0 text-[clamp(16px,1.6vw,18px)] leading-[1.65] text-muted max-w-[56ch] [text-wrap:pretty]">Infrastructure tooling, migration helpers and small utilities. Everything here is public on GitHub.</p>
+    </section>
+
+    <div class="flex items-center justify-between gap-4 flex-wrap px-5 py-4 bg-surface border border-border rounded-[10px] font-mono text-[12px] text-muted mb-2">
+      <span><span class="text-text">{repos.length}</span> public repositories · <span class="text-text">{totalStars}</span> stars given</span>
+      <a href="https://github.com/dragonfoxsl?tab=repositories" target="_blank" rel="noopener">browse all on github →</a>
+    </div>
+
+    <div class="flex flex-col pb-11">
+      {repos.map((repo) => <RepoRow repo={repo} />)}
+    </div>
+  </main>
+</BaseLayout>
