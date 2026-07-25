@@ -1,17 +1,43 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StatusPanel from '../components/StatusPanel.astro';
+import RepoCard from '../components/RepoCard.astro';
+import { getRepos } from '../lib/github';
 
+const token = import.meta.env.GITHUB_TOKEN;
+if (!token) throw new Error('GITHUB_TOKEN env var is required to build this site');
+const repos = await getRepos(token);
+const pinned = repos.slice(0, 6);
 ---
+<BaseLayout
+  title="Bisina Keshara — DevOps technical lead"
+  description="DevOps technical lead in Colombo. Pipelines, infrastructure and on-call practice."
+>
+  <main class="max-w-[1120px] mx-auto px-6">
+    <section class="grid [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))] gap-[clamp(32px,5vw,64px)] items-center py-[clamp(56px,9vw,112px)] pb-[clamp(48px,7vw,88px)]">
+      <div>
+        <div class="font-mono text-[11px] text-muted tracking-[.18em] uppercase mb-[22px]">Platform &amp; reliability</div>
+        <h1 class="m-0 mb-6 text-[clamp(38px,5.6vw,62px)] leading-[1.04] tracking-[-.035em] font-semibold [text-wrap:balance]">I keep delivery systems boring, observable and fast.</h1>
+        <p class="m-0 mb-8 text-[clamp(16px,1.5vw,18px)] leading-[1.65] text-muted max-w-[48ch] [text-wrap:pretty]">DevOps technical lead in Colombo. I build the pipelines, infrastructure and on-call practice behind products that can't afford a bad Tuesday.</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/checks" class="font-mono text-[12.5px] px-5 py-3 rounded-lg border border-accent-border text-accent tracking-[.02em] hover:bg-accent-wash hover:border-accent-border-hover">view /checks →</a>
+          <a href="/about" class="font-mono text-[12.5px] px-5 py-3 rounded-lg border border-border text-muted tracking-[.02em] hover:text-text hover:border-border-hover">about me</a>
+        </div>
+      </div>
+      <StatusPanel />
+    </section>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+    <section class="py-[clamp(40px,6vw,72px)] border-t border-border">
+      <div class="flex items-baseline justify-between gap-6 flex-wrap mb-8">
+        <div>
+          <div class="font-mono text-[12px] text-accent tracking-[.06em] mb-2.5">/checks</div>
+          <h2 class="m-0 text-[clamp(26px,3vw,34px)] tracking-[-.025em] font-semibold">Selected work</h2>
+        </div>
+        <a href="/checks" class="font-mono text-[12px] text-accent">all {repos.length} public repositories →</a>
+      </div>
+      <div class="grid [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] gap-[18px]">
+        {pinned.map((repo) => <RepoCard repo={repo} />)}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
