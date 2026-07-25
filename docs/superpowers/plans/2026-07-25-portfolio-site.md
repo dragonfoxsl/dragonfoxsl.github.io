@@ -6,7 +6,7 @@
 
 **Architecture:** Astro static site, Tailwind CSS configured with the handoff's exact design tokens, pure-function data helpers (`lib/github.ts`, `lib/contributions.ts`) tested with Vitest, Astro components/pages verified by `npm run build` since there's no meaningful red/green cycle for static markup.
 
-**Tech Stack:** Astro (static output), TypeScript, Tailwind CSS (`@astrojs/tailwind`), `@fontsource-variable/space-grotesk` + `@fontsource-variable/jetbrains-mono`, Vitest, GitHub REST + GraphQL APIs, GitHub Actions → GitHub Pages.
+**Tech Stack:** Astro (static output), TypeScript, Tailwind CSS v4 (`@tailwindcss/vite` + `@import "tailwindcss"`), `@fontsource-variable/space-grotesk` + `@fontsource-variable/jetbrains-mono`, Vitest, GitHub REST + GraphQL APIs, GitHub Actions → GitHub Pages.
 
 ## Global Constraints
 
@@ -104,10 +104,20 @@ npm create astro@latest . -- --template minimal --typescript strict --no-install
 
 ```bash
 npm install
-npx astro add tailwind -y
+npm install -D @tailwindcss/vite tailwindcss
 npm install @fontsource-variable/space-grotesk @fontsource-variable/jetbrains-mono
 npm install -D vitest
 ```
+
+> **Note (deliberate substitution, controller-approved during Task 1):** the
+> plan originally called for `npx astro add tailwind -y`, which installs the
+> Tailwind v3-era `@astrojs/tailwind` integration and its `@tailwind
+> base/components/utilities` CSS directives. The Astro/Tailwind tooling
+> actually installed at implementation time pulled in Tailwind CSS v4, which
+> replaces that integration with the `@tailwindcss/vite` Vite plugin and an
+> `@import "tailwindcss"` directive in the global stylesheet instead. See
+> `.superpowers/sdd/task-1-resume-notes.md` for the original reasoning; the
+> steps below describe what was actually built.
 
 - [ ] **Step 3: Write `tailwind.config.mjs`**
 
@@ -148,9 +158,8 @@ export default {
 - [ ] **Step 4: Write `src/styles/global.css`**
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
 
 ::selection {
   background: rgba(56, 189, 248, 0.25);
@@ -167,11 +176,13 @@ export default {
 
 ```js
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://dragonfoxsl.github.io',
-  integrations: [tailwind()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
 ```
 
