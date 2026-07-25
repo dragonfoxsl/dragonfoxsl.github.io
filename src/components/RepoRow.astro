@@ -1,0 +1,18 @@
+---
+import type { Repo } from '../lib/github';
+
+interface Props {
+  repo: Repo;
+}
+const { repo } = Astro.props;
+---
+<a href={repo.url} target="_blank" rel="noopener" class="grid [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))] gap-x-7 gap-y-2.5 items-baseline py-6 border-t border-border text-inherit hover:bg-row-hover">
+  <div class="flex flex-col gap-2.5">
+    <span class="font-mono text-[14px] text-accent break-words">{repo.name}</span>
+    <span class="inline-flex items-center gap-2 font-mono text-[11.5px] text-muted">
+      <span class="w-2 h-2 rounded-full" style={`background:${repo.color}`}></span>{repo.language}
+      {repo.stars > 0 && <span>★ {repo.stars}</span>}
+    </span>
+  </div>
+  <p class="[grid-column:span_2] m-0 text-[15px] leading-[1.6] text-muted [text-wrap:pretty]">{repo.description}</p>
+</a>
