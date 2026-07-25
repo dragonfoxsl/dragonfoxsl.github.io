@@ -28,6 +28,9 @@ export default {
         display: ['"Space Grotesk Variable"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono Variable"', 'monospace'],
       },
+      boxShadow: {
+        'signal-ring': '0 0 0 3px rgba(74,222,128,.14)',
+      },
     },
   },
 };
